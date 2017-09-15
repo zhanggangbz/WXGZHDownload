@@ -1,0 +1,146 @@
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="channelid"
+
+1
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="dopost"
+
+save
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="title"
+
+{0}
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="shorttitle"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="redirecturl"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="tags"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="weight"
+
+2
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="picname"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="litpic"; filename=""
+Content-Type: application/octet-stream
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="source"
+
+{1}
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="writer"
+
+{2}
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="typeid"
+
+2
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="typeid2"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="keywords"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="autokey"
+
+1
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="description"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="dede_addonfields"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="remote"
+
+1
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="autolitpic"
+
+1
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="needwatermark"
+
+1
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="sptype"
+
+hand
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="spsize"
+
+5
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="body"
+
+{3}
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="voteid"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="notpost"
+
+0
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="click"
+
+112
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="sortup"
+
+0
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="color"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="arcrank"
+
+0
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="money"
+
+0
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="pubdate"
+
+{4}
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="ishtml"
+
+0
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="filename"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="templet"
+
+
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="imageField.x"
+
+28
+-----------------------------7e128826811ec
+Content-Disposition: form-data; name="imageField.y"
+
+11
+-----------------------------7e128826811ec--

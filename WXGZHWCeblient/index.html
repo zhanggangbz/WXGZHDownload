@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="./css/amazeui.min.css" />
+    <title></title>
+</head>
+<body>
+    <form id="loginform" class="am-form" style="padding-left:10px;padding-right:10px;padding-top:20px">
+        <div>
+            <div>
+                <label>地址</label>
+                <input id="_url" type="text" placeholder="填入微信文章的地址">
+            </div>
+
+            <div>
+                <label>类型</label>
+                <select id="_type">
+                    <option value="1" checked>西安资讯</option>
+                    <option value="2">西安生活</option>
+                    <option value="3">城市发展</option>
+                    <option value="4">西安休闲</option>
+                    <option value="5">极致精华</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="padding-top:10px">
+            <input id="submitbtn" value="提交" type="button" onclick="login()" class="am-btn am-btn-primary am-btn-block" />
+        </div>
+    </form>
+
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">提示</div>
+            <div class="am-modal-bd">
+                已提交后台发布！<br>如果没有意外，大概两三分钟后，在网站就能看到了
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="./js/amazeui.min.js"></script>
+    <script>
+        function login() {
+            _username = $('#loginform input[id=_url]').val();
+            _password = $('#loginform select[id=_type]').val();
+            $.ajax({
+                url: './Control/ComHandler.ashx',
+                type: "POST",
+                data: {
+                    action: "sendwxurl",
+                    url: _username,
+                    type: _password
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#loginform input[id=_url]').val("");
+                    $('#my-alert').modal();
+                },
+                error: function () {
+                    alert("系统错误");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -8,6 +8,8 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Forms;
+using WXGZHDownload.DeDe;
+using WXGZHDownload.WXPost;
 
 namespace WXGZHDownload
 {
@@ -22,119 +24,70 @@ namespace WXGZHDownload
             InitializeComponent();
         }
 
-        private void CreatePath(HtmlAgilityPack.HtmlDocument doc)
+        private void button2_Click(object sender, EventArgs e)
         {
-            string user = doc.DocumentNode.SelectSingleNode("//*[@id='post-user']").InnerText;
-            if(string.IsNullOrWhiteSpace(user))
-            {
-                user = Guid.NewGuid().ToString("N");
-            }
-
-            strtitle = doc.DocumentNode.SelectSingleNode("//title").InnerText;
-            if (string.IsNullOrWhiteSpace(strtitle))
-            {
-                strtitle = Guid.NewGuid().ToString("N");
-            }
-
-            strhtmlpath = user + "\\" + strtitle;
-
-            strimagepath = strhtmlpath + "\\images";
-
-            createdir(strimagepath);
-        }
-
-        private void createdir(string filefullpath)
-        {
-            if (!File.Exists(filefullpath))
-            {
-                string[] pathes = filefullpath.Split('\\');
-                if (pathes.Length > 1)
-                {
-                    string path = pathes[0];
-                    for (int i = 1; i < pathes.Length; i++)
-                    {
-                        path += "\\" + pathes[i];
-                        if (!Directory.Exists(path))
-                        {
-                            Directory.CreateDirectory(path);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.textBox2.Text = "";
-
             string urlStr = this.textBox1.Text;
-
-            HttpClient client = new HttpClient();
-
-            string rs = client.GetStringAsync(urlStr).Result;
-
-            HtmlAgilityPack.HtmlDocument doccc = new HtmlAgilityPack.HtmlDocument();
-
-            doccc.LoadHtml(rs);
-
-            CreatePath(doccc);
-
-            HtmlAgilityPack.HtmlNodeCollection ImagePtahs = doccc.DocumentNode.SelectNodes("//img[@data-src]");
-
-            foreach(var item in ImagePtahs)
-            {
-                string imageUrl = item.Attributes["data-src"].Value;
-
-                this.textBox2.Text += imageUrl + "\r\n";
-
-                Stream inStream = client.GetStreamAsync(imageUrl).Result;
-
-                string[] lists = imageUrl.Split(new char[] { '?','&'});
-                string houzhui = "";
-                foreach(string itempit in lists)
-                {
-                    if(itempit.Contains("wx_fmt="))
-                    {
-                        houzhui = itempit.Replace("wx_fmt=", "");
-                        break;
-                    }
-                }
-
-                string imagename = Guid.NewGuid().ToString("N");
-                if (string.IsNullOrWhiteSpace(houzhui)==false)
-                {
-                    imagename = imagename + "." + houzhui;
-                }
-
-                item.Attributes.Add("src", "images\\"+imagename);
-
-                byte[] buffer = new byte[1024];
-                Stream outStream = System.IO.File.Create(strimagepath + "\\"+ imagename);
-                int l;
-                do
-                {
-                    l = inStream.Read(buffer, 0, buffer.Length);
-                    if (l > 0)
-                        outStream.Write(buffer, 0, l);
-                }
-                while (l > 0);
-
-                outStream.Close();
-                inStream.Close();
-            }
-
-            doccc.Save(strhtmlpath + "\\" + strtitle + ".html");
-
-            this.textBox2.Text += "下载完成！";
-
-            this.textBox2.Focus();
-            this.textBox2.Select(this.textBox2.TextLength, 0);
-            this.textBox2.ScrollToCaret();
+            this.webBrowser1.Url = new System.Uri(urlStr);
         }
 
-        private void CreateDir(string titlestr)
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            System.IO.Directory.CreateDirectory(titlestr);
+            string _allhtmlinfo = this.webBrowser1.DocumentText;
+            string _bodyhtmlinfo = this.webBrowser1.Document.Body.InnerHtml;
+
+            this.webBrowser1.Stop();
+
+            WXArticleInfo rs = WXArticleAdapter.GetArticle(_bodyhtmlinfo);
+
+            string articleid = Guid.NewGuid().ToString("N");
+
+            bool dbrs = WXArticleDBHelper.InseartDB(rs, articleid);
+
+            if (dbrs)
+            {
+                this.textBox2.Text += "操作完成已写入数据库！";
+            }
+            else
+            {
+                this.textBox2.Text += "操作失败未写入数据库！";
+            }
+
+            WXGZHDownload.DeDe.DeDePublic1 dede = new WXGZHDownload.DeDe.DeDePublic1();
+            if (dede.run(rs))
+            {
+                this.textBox2.Text += "已发布到网站！";
+
+                if (WXArticleDBHelper.ResetArticleFlag(articleid,1))
+                {
+                    this.textBox2.Text += "数据库更新成功！";
+                }
+                else
+                {
+                    this.textBox2.Text += "数据库更新失败！";
+                }
+            }
+            else
+            {
+                this.textBox2.Text += "未发布到网站！";
+            }
+            this.textBox2.Text += "采集及发布过程结束！\r\n";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            foreach (var item in DedeStaticValues.DicArticleType.Values)
+            {
+                this.comboBox1.Items.Add(item);
+            }
+            if (this.comboBox1.Items.Count > 0)
+            {
+                this.comboBox1.SelectedIndex = 0;
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DedeStaticValues.SetCurType(this.comboBox1.Text);
         }
     }
 }

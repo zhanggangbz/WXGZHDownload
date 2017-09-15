@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WXGZHDownload", "WXGZHDownload\WXGZHDownload.csproj", "{35DCFAAB-39F2-46E5-A76B-412325FDF5CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WXGZHArticle", "WXGZHArticle\WXGZHArticle.csproj", "{971FD4F7-6D11-40C4-B81A-5895D629E575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WXGZHWCeblient", "WXGZHWCeblient\WXGZHWCeblient.csproj", "{53225A0F-05FF-4D99-AB12-0A2CE9611166}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{35DCFAAB-39F2-46E5-A76B-412325FDF5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35DCFAAB-39F2-46E5-A76B-412325FDF5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35DCFAAB-39F2-46E5-A76B-412325FDF5CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971FD4F7-6D11-40C4-B81A-5895D629E575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971FD4F7-6D11-40C4-B81A-5895D629E575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971FD4F7-6D11-40C4-B81A-5895D629E575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971FD4F7-6D11-40C4-B81A-5895D629E575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53225A0F-05FF-4D99-AB12-0A2CE9611166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53225A0F-05FF-4D99-AB12-0A2CE9611166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53225A0F-05FF-4D99-AB12-0A2CE9611166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53225A0F-05FF-4D99-AB12-0A2CE9611166}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
